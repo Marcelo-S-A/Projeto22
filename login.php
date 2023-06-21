@@ -1,7 +1,7 @@
 <?php
     #ABRE UMA VARIAVEL SESSÂO
     session_start();
-
+    $nomeusuario;
     #SOLICITA O ARQUIVO CONECTADB
     include("conectadb.php");
 
@@ -26,6 +26,7 @@
         if($cont ==1){
             $sql = "SELECT * FROM usuarios WHERE usu_nome = '$nome'
             AND usu_senha = '$senha' AND usu_ativo = 's'";
+            $_SESSION['nomeusuario'] = $nome;
             #DIRECIONA PARA O ADM
             echo"<script>window.location.href='admhome.php';</script>";
         }
@@ -46,7 +47,7 @@
 <body>
     <form action="login.php" method="post">
         <h1>LOGIN DE USUARIO</h1>
-        <input type="text" name="nome" placeholder="NOME">
+        <input type="text" name="nome" placeholder="NOME" required>
         <p></p>
         <input type="password" name ="senha"placeholder="SENHA">
         <p></p>
