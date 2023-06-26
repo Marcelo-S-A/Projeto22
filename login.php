@@ -12,7 +12,7 @@
 
         #QUERY DE BANCO DE DADOS
         $sql = "SELECT COUNT(usu_id) FROM usuarios WHERE usu_nome = '$nome'
-        AND usu_senha = '$senha'";
+        AND usu_senha = '$senha'AND usu_ativo = 's'";
         $retorno = mysqli_query($link, $sql);
 
         #TODO RETORNO DO BANCO È RETORNADO EM ARRAY PHP
