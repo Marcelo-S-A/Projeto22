@@ -4,7 +4,7 @@ session_start();
 $nomeusuario = $_SESSION['nomeusuario'];
 
 #JÁ LISTA OS USUARIOS DO MEU BANCO
-$sql = "SELECT * FROM usuarios WHERE usu_ativo ='s'";
+$sql = "SELECT * FROM clientes WHERE cli_ativo ='s'";
 $retorno = mysqli_query($link, $sql);
 
 #JÁ FORÇA TRAZER NA VARIÁVEL ATIVO
@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     #VERIFICA SE USUARIO ESTÁ ATIVO PARA LISTAR
     if ($ativo == 's') {
-        $sql = "SELECT * FROM usuario WHERE usu_ativo = 's' ";
+        $sql = "SELECT * FROM clientes WHERE cli_ativo = 's' ";
         $retorno = mysqli_query($link, $sql);
     } else {
-        $sql = "SELECT * FROM usuarios WHERE usu_ativo = 'n' ";
+        $sql = "SELECT * FROM clientes WHERE cli_ativo = 'n' ";
         $retorno = mysqli_query($link, $sql);
     }
 }
@@ -54,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($nomeusuario != null) {
             ?>
                 <!-- USO DO ELEMENTO HTML COM O PHP INTERNO -->
-                <li class="profile">OLÁ <?= strtoupper($nomeusuario) ?></li>
+                <li class="profile">OLÁ <?= strtoupper($nomecliente) ?></li>
             <?php
                 #ABERTURA DE OUTRO PHP CASO FALSE
             } else {
-                echo "<script>window.alert('USUARIO NÃO AUTENTICADO');window.location.href='login.php';</script>";
+                echo "<script>window.alert('CLIENTE NÃO AUTENTICADO');window.location.href='login.php';</script>";
             }
             #FIM DO PHP PARA CONTINUAR MEU HTML
             ?>
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- AQUI LISTA OS USUARIOS DO BANCO-->
     <div id="background">
-        <form action="listausuario.php" method="post">
+        <form action="listacliente.php" method="post">
             <input type="radio" name="ativo" class="radio" value="s" required onclick="submit()" <?= $ativo == 's' ? "checked" : "" ?>>ATIVOS
 
             <input type="radio" name="ativo" class="radio" value="n" required onclick="submit()" <?= $ativo == 'n' ? "checked" : "" ?>>INATIVOS
@@ -77,7 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="container">
             <table border="1">
                 <tr>
+                    <th>CPF</th>
                     <th>NOME</th>
+                    <th>DATA DE NASCIMENTO</th>
+                    <th>TELEFONE</th>
+                    <th>LOGRADOURO</th>
+                    <th>NUMERO</th>
+                    <th>CIDADE</th>
                     <th>ALTERAR DADOS</th>
                     <th>ATIVO?</th>
                 </tr>
@@ -86,10 +92,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 while ($tbl = mysqli_fetch_array($retorno)) {
                 ?>
                     <tr>
-                        <td><?= $tbl[1] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [NOME] -->
-                        <td><a href="alterausuario.php?id= <?= $tbl[0] ?>">
+                        <td><?= $tbl[1] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [CPF] -->
+                        <td><?= $tbl[2] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [NOME] -->
+                        <td><?= $tbl[4] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [DATA DE NASCIMENTO] -->
+                        <td><?= $tbl[5] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [TELEFONE] -->
+                        <td><?= $tbl[6] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [LOGRADOURO] -->
+                        <td><?= $tbl[7] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [NUMERO] -->
+                        <td><?= $tbl[8] ?></td> <!-- TRAZ SOMENTE A COLUNA ! DO BANCO [CIDADE] -->
+                        <td><a href="alteraclientes.php?id= <?= $tbl[0] ?>">
                                 <input type="button" value="ALTERAR DADOS"></a></td><!--CRIANDO UM BOTÃO ALTERAR PASSANDO O ID DO USUARIO VIA GET-->
-                        <td><?= $check = ($tbl[3] == 's') ? "SIM" : "NÃO" ?></td><!-- VALIDA S OU N E ESCREVE "SIM" E "NÃO-->
+                        <td><?= $check = ($tbl[9] == 's') ? "SIM" : "NÃO" ?></td><!-- VALIDA S OU N E ESCREVE "SIM" E "NÃO-->
                     </tr>
                 <?php
                 }
