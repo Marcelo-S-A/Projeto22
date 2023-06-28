@@ -1,6 +1,5 @@
 <?php
 include("conectadb.php");
-
 session_start();
 $nomeusuario = $_SESSION["nomeusuario"];
 
@@ -48,14 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div>
         <ul class="menu">
-            <li><a href="cadastrausuario.php">CADASTRA USUARIO</a></li>
-            <li><a href="cadastracliente.php">CADASTRA CLIENTE</a></li>
-            <li><a href="listausuario.php">LISTA USUARIO</a></li>
-            <li><a href="listacliente.php">LISTA CLIENTE</a></li>
-            <li><a href="cadastraproduto.php">CADASTRA PRODUTO</a></li>
-            <li><a href="listaproduto.php">LISTA PRODUTO</a></li>
-            <li><a href="listacliente.php">LISTA CLIENTE</a></li>
-            <li class="menuloja"><a href="./areacliente/loja.php">LOJA</a></li>
+                <li><a href="cadastrausuario.php">CADASTRA USUARIO</a></li>
+                <li><a href="cadastracliente.php">CADASTRA CLIENTE</a></li>
+                <li><a href="cadastraproduto.php">CADASTRA PRODUTO</a></li>
+                <li><a href="listausuario.php">LISTA USUARIO</a></li>
+                <li><a href="listacliente.php">LISTA CLIENTE</a></li>
+                <li><a href="listaproduto.php">LISTA PRODUTO</a></li>
+                <li class="menuloja"><a href="./areacliente/loja.php">LOJA</a></li>
         </ul>
     </div>
 
