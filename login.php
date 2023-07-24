@@ -1,7 +1,7 @@
 <?php
     #ABRE UMA VARIAVEL SESSÂO
     session_start();
-    $nomeusuario;
+  
     #SOLICITA O ARQUIVO CONECTADB
     include("conectadb.php");
 
@@ -23,16 +23,17 @@
         #VERIFICA SE USUARIO EXISTE
         #SE $CONT == 1 ELE EXISTE E FAZ LOGIN
         #SE $CONT == 0 ELE NÂO EXISTE E USUARIO NÂO ESTÁ CADASTRADO
-        if($cont ==1){
+        if($cont == 1){
             $sql = "SELECT * FROM usuarios WHERE usu_nome = '$nome'
             AND usu_senha = '$senha' AND usu_ativo = 's'";
+            mysqli_query($link, $sql);
             $_SESSION['nomeusuario'] = $nome;
             #DIRECIONA PARA O ADM
             echo"<script>window.location.href='admhome.php';</script>";
         }
-        else
+        else{
         echo"<script>windows.alert('USUARIO OU SENHA INCORRETO');</script>";
-    
+        }
     }
 
 ?>
