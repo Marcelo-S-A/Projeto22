@@ -7,7 +7,7 @@
     ## NOME DO BANCO
     $banco = "projeto22";
     ##USUARIO DE ACESSO
-    $usuario = "admin";
+    $usuario = "administrador";
     ##SENHA DO USUARIO
     $senha = "123";
 
